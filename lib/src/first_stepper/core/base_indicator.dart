@@ -36,6 +36,8 @@ class BaseIndicator extends StatelessWidget {
 
   final bool? isStepCompleted;
 
+  final String subTitle;
+
   BaseIndicator({
     this.isStepCompleted,
     this.completedColor,
@@ -49,37 +51,52 @@ class BaseIndicator extends StatelessWidget {
     this.padding = 5.0,
     this.margin = 1.0,
     this.activeBorderWidth = 0.5,
+    required this.subTitle,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: isSelected ? EdgeInsets.all(margin) : EdgeInsets.zero,
-      decoration: BoxDecoration(
-        border: isSelected
-            ? Border.all(
-                color: activeBorderColor ?? Colors.blue,
-                width: activeBorderWidth,
-              )
-            : null,
-        shape: BoxShape.circle,
-      ),
-      child: InkWell(
-        onTap: onPressed as void Function()?,
-        child: Container(
-          height: radius * 2,
-          width: radius * 2,
-          padding: EdgeInsets.all(padding),
+    return Column(
+      children: [
+        Container(
+          padding: isSelected ? EdgeInsets.all(margin) : EdgeInsets.zero,
           decoration: BoxDecoration(
-            color:
-            isSelected ? activeColor ?? Colors.green :(isStepCompleted == true) ? completedColor ?? Colors.green : color ?? Colors.grey,
+            border: isSelected
+                ? Border.all(
+                    color: activeBorderColor ?? Colors.blue,
+                    width: activeBorderWidth,
+                  )
+                : null,
             shape: BoxShape.circle,
           ),
-          child: Center(
-            child: child,
+          child: InkWell(
+            onTap: onPressed as void Function()?,
+            child: Container(
+              height: radius * 2,
+              width: radius * 2,
+              padding: EdgeInsets.all(padding),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? activeColor ?? Colors.green
+                    : (isStepCompleted == true)
+                        ? completedColor ?? Colors.green
+                        : color ?? Colors.grey,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: child,
+              ),
+            ),
           ),
         ),
-      ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          subTitle,
+          style: TextStyle(color: isSelected ? activeColor : Colors.black),
+        ),
+      ],
     );
   }
 }

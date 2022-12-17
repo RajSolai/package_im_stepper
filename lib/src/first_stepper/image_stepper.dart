@@ -12,6 +12,8 @@ class ImageStepper extends StatelessWidget {
   /// Whether to allow tapping a step to move to that step or not.
   final bool enableStepTapping;
 
+  final List<String> subTitles;
+
   /// Icon to be used for the previous button.
   final Icon? previousButtonIcon;
 
@@ -75,6 +77,7 @@ class ImageStepper extends StatelessWidget {
   /// Creates an ImageStepper widget.
   ImageStepper({
     this.images,
+    required this.subTitles,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
     this.previousButtonIcon,
@@ -102,6 +105,7 @@ class ImageStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
+      subTitles: subTitles,
       children: _imagesWrappedInCircleAvatar(),
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
       stepTappingDisabled: enableStepTapping,

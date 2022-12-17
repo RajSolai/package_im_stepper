@@ -75,6 +75,8 @@ class NumberStepper extends StatelessWidget {
   /// Specifies the alignment of the NumberStepper.
   final AlignmentGeometry alignment;
 
+  final List<String> subTitles;
+
   /// Creates a NumberStepper widget.
   NumberStepper({
     this.numbers,
@@ -101,11 +103,13 @@ class NumberStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+    required this.subTitles,
   });
 
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
+      subTitles: subTitles,
       children: _numbersWrappedInText(),
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
       stepTappingDisabled: enableStepTapping,

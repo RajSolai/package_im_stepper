@@ -22,6 +22,8 @@ class IconStepper extends StatelessWidget {
   /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
   final OnStepReached? onStepReached;
 
+  final List<String> subTitles;
+
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
 
@@ -83,10 +85,7 @@ class IconStepper extends StatelessWidget {
   final bool? stepperAnimateInMiddle;
 
   // completed Map
-  final Map<String,int>? completedTasks;
-
-
-
+  final Map<String, int>? completedTasks;
 
   /// Creates an IconStepper widget.
   IconStepper({
@@ -117,11 +116,13 @@ class IconStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+    required this.subTitles,
   });
 
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
+      subTitles: subTitles,
       completedSteps: completedTasks,
       children: _iconsWithSizeOverridden(),
       stepperAnimateInMiddle: stepperAnimateInMiddle,

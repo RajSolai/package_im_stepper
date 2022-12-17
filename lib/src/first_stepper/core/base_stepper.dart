@@ -36,6 +36,7 @@ class BaseStepper extends StatefulWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment,
+    required this.subTitles,
   }) : super(key: key) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -53,14 +54,15 @@ class BaseStepper extends StatefulWidget {
     );
   }
 
-
   // completed Map
-  final Map<String,int>? completedSteps;
+  final Map<String, int>? completedSteps;
   //Animate Selected Stepper in middle
   final bool? stepperAnimateInMiddle;
 
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
   final List<Widget>? children;
+
+  final List<String> subTitles;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool nextPreviousButtonsDisabled;
@@ -166,9 +168,11 @@ class BaseStepperState extends State<BaseStepper> {
   void _afterLayout(_) {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.children!.length; i++) {
-      print(widget.stepperAnimateInMiddle );
+      print(widget.stepperAnimateInMiddle);
       _scrollController!.animateTo(
-        widget.stepperAnimateInMiddle == true? (i * ((widget.stepRadius * 2) + widget.lineLength)) - 98 : i * ((widget.stepRadius * 2) + widget.lineLength),
+        widget.stepperAnimateInMiddle == true
+            ? (i * ((widget.stepRadius * 2) + widget.lineLength)) - 98
+            : i * ((widget.stepRadius * 2) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
@@ -255,8 +259,10 @@ class BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
-      isStepCompleted: widget.completedSteps![index.toString()] == 0 ? false : true,
+      isStepCompleted:
+          widget.completedSteps![index.toString()] == 0 ? false : true,
       isSelected: _selectedIndex == index,
+      subTitle: widget.subTitles[index],
       onPressed: widget.stepTappingDisabled
           ? () {
               if (widget.steppingEnabled) {

@@ -28,9 +28,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     Icon(Icons.flag),
     Icon(Icons.access_alarm),
     Icon(Icons.add_alert),
-    Icon(Icons.gavel_outlined),
-    Icon(Icons.wallet),
-    Icon(Icons.movie),
   ];
 
 
@@ -55,8 +52,9 @@ class _IconStepperDemo extends State<IconStepperDemo> {
           child: Column(
             children: [
               IconStepper(
+                subTitles: ["asdfasdfasdf","asf","asdfasf","asfasdfasdf"],
                 completedTasks: completedTasks,
-                stepCompletedColor: finished,
+ 
                 stepperAnimateInMiddle: true,
                 icons: allIcons,
                 stepsCompletedStatusMap: completeStatusMap,
